@@ -13,11 +13,6 @@ class RepositoryTableViewCell: UITableViewCell {
     @IBOutlet weak var descr: UITextView!
     @IBOutlet weak var stars: UILabel!
     @IBOutlet weak var forks: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     func configure(_ repo: Repo) {
         name.text = repo.name

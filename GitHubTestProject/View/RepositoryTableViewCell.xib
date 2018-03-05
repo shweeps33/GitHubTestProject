@@ -31,7 +31,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="f78-AH-Xe4">
                                 <rect key="frame" x="247" y="10.333333333333336" width="63" height="20"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sqw-lb-Vym">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="Sqw-lb-Vym">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="2dN-4Z-O39"/>
@@ -44,7 +44,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ueB-fh-43M">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fork" translatesAutoresizingMaskIntoConstraints="NO" id="ueB-fh-43M">
                                         <rect key="frame" x="32" y="0.0" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="QfP-rI-86T"/>
@@ -98,4 +98,8 @@
             <point key="canvasLocation" x="26" y="87"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="fork" width="128" height="128"/>
+        <image name="star" width="40" height="40"/>
+    </resources>
 </document>

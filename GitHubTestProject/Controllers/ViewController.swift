@@ -13,18 +13,20 @@ import SwiftyJSON
 class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
+    let cellID = "RepositoryTableViewCell"
+    let nib = "RepositoryTableViewCell"
+    let listName = "CocoaPods Repo's"
+    
     var isEnd = false
-    var cellID = "RepositoryTableViewCell"
-    var gitUrl = "https://api.github.com/users/cocoapods/repos"
     var reposArray = [Repo]()
     var currentPage = 1
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = listName
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "RepositoryTableViewCell", bundle: nil), forCellReuseIdentifier: cellID)
+        tableView.register(UINib(nibName: nib, bundle: nil), forCellReuseIdentifier: cellID)
         getRepos(currentPage)
     }
     
@@ -33,40 +35,33 @@ class ViewController: UIViewController {
             self.reposArray.append(contentsOf: response)
             self.isEnd = response.isEmpty
             
-            //FIXME: - insert rows
-            self.tableView.reloadData()
-
+            var indexPaths = [IndexPath]()
+            let lastIndex = self.tableView.numberOfRows(inSection: 0)
+            let newLastIndex = lastIndex + response.count
+            
+            for index in lastIndex..<newLastIndex {
+                indexPaths.append(IndexPath(row: index, section: 0))
+            }
+            self.tableView.insertRows(at: indexPaths, with: .bottom)
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reposArray.count
     }
     
-    private func loadMoreTapped() {
+    private func loadMore() {
         currentPage += 1
         getRepos(currentPage)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? RepositoryTableViewCell else { return UITableViewCell() }
-        
         guard let repo = reposArray[safe: indexPath.row] else { return cell}
         cell.configure(repo)
-       
         return cell
-        
-        defer {
-            
-        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -81,7 +76,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == reposArray.count - 1, !self.isEnd {
-            loadMoreTapped()
+            loadMore()
         }
     }
     

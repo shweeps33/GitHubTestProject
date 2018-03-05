@@ -15,12 +15,16 @@ struct Repo {
     var url = ""
     var stars = 0
     var forks = 0
+    var tags: URL?
     
-    mutating func updateWithData(_ data: JSON) {
+    mutating func updateWith(data: JSON) {
         self.name = data["name"].string ?? ""
         self.descr = data["description"].string ?? ""
         self.forks = data["forks_count"].int ?? 0
         self.stars = data["stargazers_count"].int ?? 0
-        self.url = String(describing: data["html_url"].url) ?? ""
+        self.url = data["html_url"].string ?? ""
+        if let url = data["tags_url"].url {
+            self.tags = url
+        }
     }
 }
